@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart - GH Marketplace</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0a3d62;
+    }
+
+    ul#cart-items {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul#cart-items li {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .total {
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    .back-home {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 15px;
+      background-color: #0a3d62;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .back-home:hover {
+      background-color: #065a8f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Your Cart</h2>
+    <ul id="cart-items"></ul>
+    <p class="total">Total: GH₵ <span id="cart-total">0</span></p>
+    <a href="index.html" class="back-home">← Back to Shop</a>
+  </div>
+
+  <script>
+    // Load cart items from localStorage (if using JS cart)
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const cartList = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+
+    let total = 0;
+    cartItems.forEach(item => {
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${item.name}</span><span>GH₵ ${item.price}</span>`;
+      cartList.appendChild(li);
+      total += item.price;
+    });
+
+    cartTotal.textContent = total.toFixed(2);
+  </script>
+</body>
+</html>
